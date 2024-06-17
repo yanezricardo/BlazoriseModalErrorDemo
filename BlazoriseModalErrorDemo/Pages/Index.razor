@@ -1,0 +1,16 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<Button Class="btn btn-primary" Clicked="@OpenModal">Open Modal</Button>
+
+<SampleModal @ref="_sampleModal" />
+
+@code{
+    private SampleModal _sampleModal = default!;
+
+    private async Task OpenModal()
+    {
+        await _sampleModal.OpenModalAsync();
+    }
+}

@@ -1,0 +1,45 @@
+﻿<Modal @ref="_modal">
+    <ModalContent>
+        <ModalHeader>
+            <ModalTitle>Modal</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
+            <h1>Data</h1>
+
+        </ModalBody>
+        <ModalFooter>
+            <Button Class="btn btn-outline-secondary" Clicked="@CloseModalAsync" Disabled="_isSaving">Cancel</Button>
+            <Button Class="btn btn-outline-primary" Clicked="@Save" Disabled="_isSaving" Loading="_isSaving">Save</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal? _modal;
+    private bool _isSaving;
+
+    [Parameter] public EventCallback<bool> Close { get; set; }
+
+
+    public async Task OpenModalAsync()
+    {
+        _isSaving = false;
+
+        await _modal!.Show();
+    }
+
+    private async Task CloseModalAsync()
+    {
+        await _modal!.Hide();
+        await Close.InvokeAsync();
+    }
+
+    private async Task Save()
+    {
+        if (_isSaving)
+        {
+            return;
+        }
+
+    }
+}
